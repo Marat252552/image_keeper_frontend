@@ -1,0 +1,31 @@
+.container {
+    display: flex;
+    justify-content: end;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.info_module {
+    display: flex;
+    gap: 10px;
+}
+
+.time_module {
+    display: flex;
+    height: 100%;
+    align-items: end;
+}
+
+.text {
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 10px;
+    justify-content: center;
+    color: black;
+    font-size: 14px;
+    /* font-family: Montserrat; */
+    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+}

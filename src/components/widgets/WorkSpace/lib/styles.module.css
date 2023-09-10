@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.workSpaceHeader_container {
+    width: 100%;
+    color: #EEEEEE;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.imagesList_container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    row-gap: 20px;
+    column-gap: 10px;
+}

@@ -1,0 +1,14 @@
+.container {
+    width: 100%;
+    display: flex;
+}
+
+.mainContainer {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 25px;
+}
