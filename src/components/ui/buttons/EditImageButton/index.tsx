@@ -1,4 +1,4 @@
-import { DeleteFilled, EditOutlined } from "@ant-design/icons"
+import {  EditOutlined } from "@ant-design/icons"
 import { Button } from "antd"
 import styles from './lib/styles.module.css'
 

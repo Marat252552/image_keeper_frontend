@@ -6,11 +6,14 @@ import styles from "./lib/styles.module.css";
 import UploadWindow from "./elements/UploadWindow";
 import AddImageAPI from "../../../api/actions/AddImage";
 import MainSlice from "../../../state/Reducers/MainSlice";
-import { useAppDispatch } from "../../../state/hooks";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+
+
 
 const HomePage = () => {
 
-  const {addImage} = MainSlice.actions
+  const {addImage, updateTimePeriods} = MainSlice.actions
+  const {images} = useAppSelector(state => state.mainReducer.data)
   const dispatch = useAppDispatch()
 
   const [drag, setDrag] = useState(false);
@@ -33,6 +36,7 @@ const HomePage = () => {
         formData.append("file", file);
         const response = await AddImageAPI(formData);
         dispatch(addImage({image: response.data.image}))
+        dispatch(updateTimePeriods())
       } catch(e) {
         console.log(e)
       }
@@ -42,6 +46,7 @@ const HomePage = () => {
 
   return (
     <>
+
       {drag ? (
         <div
           onDragStart={onDragHandler}
@@ -49,9 +54,7 @@ const HomePage = () => {
           onDragOver={onDragHandler}
           onDrop={onDrop}
         >
-          <div>
             <UploadWindow />
-          </div>
         </div>
       ) : undefined}
       <LargeMaxFullWidthTemplate>
@@ -60,7 +63,7 @@ const HomePage = () => {
           onDragOver={onDragHandler}
           className={styles.container}
         >
-          <Header images_total={20} />
+          <Header images_total={images.length} />
           <Body />
         </div>
       </LargeMaxFullWidthTemplate>

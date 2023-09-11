@@ -1,4 +1,4 @@
-import { ImagesFolder_T, TimePeriod_T } from "../../../../state/Reducers/MainSlice";
+import { TimePeriod_T } from "../../../../state/Reducers/MainSlice";
 import { Image_T } from "../../../shared/lib/types";
 
 export type WorkSpace_T = ({

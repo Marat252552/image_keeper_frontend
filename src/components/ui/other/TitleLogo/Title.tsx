@@ -1,5 +1,5 @@
 import logo from "./../../../../assets/logo.svg";
-import styles from './../lib/styles.module.css'
+import styles from './lib/styles.module.css'
 
 const Title = () => {
   return (

@@ -15,6 +15,7 @@ import Spinner from '../../../ui/Spinner'
 import { useNavigate } from 'react-router-dom'
 
 
+
 const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.SetStateAction<boolean>> }) => {
 
     const { register, formState: { errors }, handleSubmit} = useForm<LoginValues_T>({
@@ -40,7 +41,8 @@ const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.Se
             navigate('/home')
         } catch(e: unknown) {
             console.log(e)
-            let message_info = e?.response?.data?.message || 'Произошла непредвиденная ошибка'
+            // @ts-ignore
+            const message_info = e?.response?.data?.message || 'Произошла непредвиденная ошибка'
             message.error(message_info)
         } finally {
             setLoading(false)

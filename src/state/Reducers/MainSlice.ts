@@ -49,6 +49,13 @@ const MainSlice = createSlice({
         return image._id !== _id;
       });
     },
+    updateImage(state, action: PayloadAction<{image: Image_T}>) {
+      const {image} = action.payload
+      state.data.images = state.data.images.filter(el => {
+        return el._id !== image._id
+      })
+      state.data.images.push(image)
+    }
   },
 });
 

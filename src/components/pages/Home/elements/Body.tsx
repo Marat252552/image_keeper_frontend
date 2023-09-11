@@ -6,6 +6,7 @@ import MainSlice from "../../../../state/Reducers/MainSlice";
 import styles from "./../lib/styles.module.css";
 import DeleteImageAPI from "../../../../api/actions/DeleteImageAPI";
 import { Image_T } from "../../../shared/lib/types";
+import NoImagesWindow from "./NoImagesWindow";
 
 const Body = () => {
   const { data } = useAppSelector((state) => state.mainReducer);
@@ -20,6 +21,7 @@ const Body = () => {
     try {
       await DeleteImageAPI({ image_id: image._id });
       dispatch(deleteImageAC({ image }));
+      dispatch(updateTimePeriods())
     } catch (e) {
       console.log(e);
     }
@@ -49,6 +51,7 @@ const Body = () => {
 
   return (
     <div className={styles.body_container}>
+      {!data.timePeriods[0] && <NoImagesWindow />}
       {data.timePeriods.map((timePeriod) => {
         return (
           <WorkSpace
