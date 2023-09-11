@@ -4,8 +4,8 @@ import styles from './lib/styles.module.css'
 
 
 
-const EditImageButton = (props: any) => {
-    return <Button {...props} className={styles.container} ><EditOutlined /></Button>
+const EditImageButton = ({onClick}: {onClick: () => void}) => {
+    return <Button onClick={onClick} className={styles.container} ><EditOutlined /></Button>
 }
 
 export default EditImageButton

@@ -4,8 +4,8 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 
 
-const OpenImageButton = () => {
-    return <Button className={styles.container} ><RemoveRedEyeIcon /></Button>
+const OpenImageButton = ({onClick}: {onClick: () => void}) => {
+    return <Button onClick={onClick} className={styles.container} ><RemoveRedEyeIcon /></Button>
 }
 
 export default OpenImageButton

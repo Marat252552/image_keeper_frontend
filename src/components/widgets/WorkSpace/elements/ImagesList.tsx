@@ -1,12 +1,12 @@
-import Image from "../../../entities/Image";
 import styles from "./../lib/styles.module.css";
 import { ImagesList_T } from "../lib/types";
+import Image_F from "../../../features/ImageContainer";
 
-const ImagesList: ImagesList_T = ({images, deleteImage}) => {
+const ImagesList: ImagesList_T = ({images}) => {
   return (
     <div className={styles.imagesList_container}>
       {images && images.map((image) => {
-        return <Image key={image._id} deleteImage={deleteImage} image={image}/>
+        return <Image_F image={image} key={image._id}/>
       })}
     </div>
   );
