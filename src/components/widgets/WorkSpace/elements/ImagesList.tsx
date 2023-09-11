@@ -3,7 +3,6 @@ import styles from "./../lib/styles.module.css";
 import { ImagesList_T } from "../lib/types";
 
 const ImagesList: ImagesList_T = ({images, deleteImage}) => {
-  console.log(images)
   return (
     <div className={styles.imagesList_container}>
       {images && images.map((image) => {
