@@ -4,7 +4,7 @@ import WorkSpaceHeader from "./elements/WorkSpaceHeader";
 import { WorkSpace_T } from "./lib/types";
 import GetFullDateAndLabel from "../../shared/helpers/GetFullDateAndLabel";
 
-const WorkSpace: WorkSpace_T = ({ allImages, timePeriod, deleteImage, editImage }) => {
+const WorkSpace: WorkSpace_T = ({ allImages, timePeriod, deleteImage }) => {
   const images = allImages.filter(image => {
     const {fullDate} = GetFullDateAndLabel(image.createdAt)
     return fullDate === timePeriod.date
@@ -13,7 +13,7 @@ const WorkSpace: WorkSpace_T = ({ allImages, timePeriod, deleteImage, editImage 
   return (
     <div className={styles.container}>
       <WorkSpaceHeader header={timePeriod.label} amount={images.length} />
-      <ImagesList deleteImage={deleteImage} editImage={editImage} images={images} />
+      <ImagesList deleteImage={deleteImage} images={images} />
     </div>
   );
 };

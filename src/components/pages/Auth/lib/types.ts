@@ -10,3 +10,7 @@ export type SigninValues_T = {
     password2: string,
     remember: boolean
 }
+
+export type SigninForm_T = ({ setIsLoginForm }: {
+    setIsLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
+}) => JSX.Element

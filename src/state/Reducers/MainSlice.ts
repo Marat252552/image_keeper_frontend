@@ -30,17 +30,17 @@ const MainSlice = createSlice({
     setToken(state, action: PayloadAction<{ accessToken: string }>) {
       state.token = action.payload.accessToken;
     },
-    updateTimePeriods(state) {
-      const timePeriods = CreateTimePeriods(state);
-      state.data.timePeriods = timePeriods;
-    },
     setImages(state, action: PayloadAction<{ images: Image_T[] }>) {
       const { images } = action.payload;
       state.data.images = images;
+
+      state.data.timePeriods = CreateTimePeriods(state);
     },
     addImage(state, action: PayloadAction<{ image: Image_T }>) {
       const { image } = action.payload;
       state.data.images.push(image);
+
+      state.data.timePeriods = CreateTimePeriods(state);
     },
     deleteImage(state, action: PayloadAction<{ image: Image_T }>) {
       const { _id } = action.payload.image;
@@ -48,6 +48,8 @@ const MainSlice = createSlice({
       state.data.images = state.data.images.filter((image) => {
         return image._id !== _id;
       });
+
+      state.data.timePeriods = CreateTimePeriods(state);
     },
     updateImage(state, action: PayloadAction<{image: Image_T}>) {
       const {image} = action.payload
@@ -55,6 +57,8 @@ const MainSlice = createSlice({
         return el._id !== image._id
       })
       state.data.images.push(image)
+
+      state.data.timePeriods = CreateTimePeriods(state);
     }
   },
 });

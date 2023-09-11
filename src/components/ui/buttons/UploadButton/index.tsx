@@ -1,6 +1,6 @@
 import styles from "./lib/styles.module.css";
 import upload_image from "./../../../../assets/upload.svg";
-import AddImageAPI from "../../../../api/actions/AddImage";
+import AddImageAPI from "../../../../api/actions/AddImageAPI";
 import { useAppDispatch } from "../../../../state/hooks";
 import MainSlice from "../../../../state/Reducers/MainSlice";
 import GrayButtonTemplate from "../../../shared/templates/GrayButtonTemplate";

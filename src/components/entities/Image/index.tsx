@@ -1,11 +1,10 @@
 import styles from "./lib/styles.module.css";
 import { MakeImage_T } from "./lib/types";
 import DeleteImageButton from "../../ui/buttons/DeleteImageButton";
-import EditImageButton from "../../ui/buttons/EditImageButton";
-import OpenImageButton from "../../ui/buttons/OpenImageButton";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 import EditWindow from "./elements/EditWindow";
+import OpenButton from "./elements/OpenImageButton";
+import EditButton from "./elements/EditButton";
 
 
 const Image: MakeImage_T = ({ image, deleteImage }) => {
@@ -13,7 +12,7 @@ const Image: MakeImage_T = ({ image, deleteImage }) => {
 
   return (
     <>
-    {active && <EditWindow setActive={setActive} image={image} />}
+      {active && <EditWindow setActive={setActive} image={image} />}
       <div className={styles.container}>
         <img className={styles.image} draggable="false" src={image.src} />
         <div className={styles.image_menu}>
@@ -25,14 +24,8 @@ const Image: MakeImage_T = ({ image, deleteImage }) => {
                 deleteImage(image);
               }}
             />
-            <Link to={image.src}>
-              <OpenImageButton />
-            </Link>
-            <EditImageButton
-              onClick={() => {
-                setActive((prev) => !prev);
-              }}
-            />
+            <OpenButton src={image.src} />
+            <EditButton setActive={setActive} />
           </div>
         </div>
       </div>

@@ -4,17 +4,17 @@ import FilledInput from '../../../ui/FilledInput'
 import styles from './../lib/styles.module.css'
 import StarText from '../../../shared/Texts/StarText'
 import { useForm } from 'react-hook-form'
-import { SigninValues_T } from '../lib/types'
-import signinAPI from '../../../../api/actions/signinAPI'
+import { SigninForm_T, SigninValues_T } from '../lib/types'
+import signinAPI from '../../../../api/actions/SigninAPI'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../../../state/hooks' 
 import MainSlice from '../../../../state/Reducers/MainSlice'
 import { useState } from 'react'
 import Spinner from '../../../ui/Spinner'
-import {message} from 'antd'
+import ErrorHandler from '../../../../api/helpers/ErrorHandler'
 
 
-const SigninForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const SigninForm: SigninForm_T = ({ setIsLoginForm }) => {
 
     const { register, handleSubmit, formState: { errors } } = useForm<SigninValues_T>({
         mode: 'onChange',
@@ -40,12 +40,8 @@ const SigninForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.S
                 localStorage.setItem('access_token', accessToken)
                 dispatch(setToken({accessToken}))
             }
-        } catch (e: any) {
-            console.log(e)
-            const {message: message_info} = e.response.data
-            if(e.response.status === 400 && message_info) {
-                message.error(message_info)
-            }
+        } catch (e: unknown) {
+            ErrorHandler(e)
         } finally {
             setLoading(false)
         }

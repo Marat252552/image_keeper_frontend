@@ -7,12 +7,12 @@ import { useForm } from 'react-hook-form'
 import CustomCheckbox from './CustomCheckbox'
 import { LoginValues_T } from '../lib/types'
 import { useEffect, useState } from 'react'
-import {message} from 'antd'
-import loginAPI from '../../../../api/actions/loginAPI'
+import loginAPI from '../../../../api/actions/LoginAPI'
 import MainSlice from '../../../../state/Reducers/MainSlice'
 import { useAppDispatch } from '../../../../state/hooks'
 import Spinner from '../../../ui/Spinner'
 import { useNavigate } from 'react-router-dom'
+import ErrorHandler from '../../../../api/helpers/ErrorHandler'
 
 
 
@@ -40,10 +40,7 @@ const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.Se
             localStorage.setItem('accessToken', accessToken)
             navigate('/home')
         } catch(e: unknown) {
-            console.log(e)
-            // @ts-ignore
-            const message_info = e?.response?.data?.message || 'Произошла непредвиденная ошибка'
-            message.error(message_info)
+            ErrorHandler(e)
         } finally {
             setLoading(false)
         }

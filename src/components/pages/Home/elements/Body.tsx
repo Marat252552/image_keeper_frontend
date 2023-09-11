@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import GetImagesAPI from "../../../../api/actions/GetImage";
+import GetImagesAPI from "../../../../api/actions/GetImageAPI";
 import WorkSpace from "../../../widgets/WorkSpace";
 import { useAppDispatch, useAppSelector } from "../../../../state/hooks";
 import MainSlice from "../../../../state/Reducers/MainSlice";
@@ -7,46 +7,35 @@ import styles from "./../lib/styles.module.css";
 import DeleteImageAPI from "../../../../api/actions/DeleteImageAPI";
 import { Image_T } from "../../../shared/lib/types";
 import NoImagesWindow from "./NoImagesWindow";
+import ErrorHandler from "../../../../api/helpers/ErrorHandler";
+
 
 const Body = () => {
   const { data } = useAppSelector((state) => state.mainReducer);
   const {
     setImages,
     deleteImage: deleteImageAC,
-    updateTimePeriods,
   } = MainSlice.actions;
   const dispatch = useAppDispatch();
 
   const deleteImage = async (image: Image_T) => {
     try {
-      await DeleteImageAPI({ image_id: image._id });
-      dispatch(deleteImageAC({ image }));
-      dispatch(updateTimePeriods())
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const editImage = async (image: Image_T) => {
-    try {
-      await DeleteImageAPI({ image_id: image._id });
+      await DeleteImageAPI(image._id);
       dispatch(deleteImageAC({ image }));
     } catch (e) {
-      console.log(e);
+      ErrorHandler(e)
     }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
+    (async () => {
       try {
-        const response = await GetImagesAPI();
-        dispatch(setImages({ images: response.data.images }));
-        dispatch(updateTimePeriods());
+        const {data: {images}} = await GetImagesAPI();
+        dispatch(setImages({ images }));
       } catch (e) {
-        console.log(e);
+        ErrorHandler(e)
       }
-    };
-    fetchData();
+    })()
   }, []);
 
   return (
@@ -59,7 +48,6 @@ const Body = () => {
             allImages={data.images}
             timePeriod={timePeriod}
             deleteImage={deleteImage}
-            editImage={editImage}
           />
         );
       })}
