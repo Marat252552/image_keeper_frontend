@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-
+console.log(import.meta.env.backend_url)
 
 export const instanse = axios.create({
     withCredentials: true,
-    baseURL: import.meta.env.BASE_URL,
+    baseURL: import.meta.env.backend_url || 'http://localhost:3300',
     headers: {
         "Content-Type": "multipart/form-data"
     }

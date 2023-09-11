@@ -3,6 +3,8 @@
     display: flex;
     justify-content: center;
     user-select: none;
+    min-height: 100vh;
+    align-items: center;
     --text-color: #636363;
     --middle-text-color: #9a9a9a;
     --button-color: rgb(160, 160, 160);
