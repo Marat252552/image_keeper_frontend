@@ -4,7 +4,7 @@ import axios from 'axios'
 
 export const instanse = axios.create({
     withCredentials: true,
-    baseURL: 'http://localhost:3300',
+    baseURL: import.meta.env.BASE_URL,
     headers: {
         "Content-Type": "multipart/form-data"
     }
