@@ -1,8 +1,7 @@
-import styles from "./lib/styles.module.css";
 import FormPageTemplate from "../../shared/templates/FormPageTemplate";
 import { useState } from "react";
-import LoginForm from "./elements/LoginForm";
-import SigninForm from "./elements/SigninForm";
+import LoginForm from "../../widgets/LoginForm";
+import SigninForm from "../../widgets/SigninForm";
 
 const AuthPage = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
@@ -14,20 +13,9 @@ const AuthPage = () => {
 
   return (
     <>
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: 'flex',
-          justifyContent: "center"
-        }}
-      >
-        <FormPageTemplate>
-          <div className={styles.container}>
-            <CurrentForm />
-          </div>
-        </FormPageTemplate>
-      </div>
+      <FormPageTemplate>
+        <CurrentForm />
+      </FormPageTemplate>
     </>
   );
 };

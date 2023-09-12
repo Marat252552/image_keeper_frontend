@@ -1,22 +1,23 @@
 import { LoginOutlined } from '@ant-design/icons'
-import IconFilledButton from '../../../ui/buttons/templates/IconFilledButton'
-import FilledInput from '../../../ui/other/templates/FilledInput'
-import styles from './../lib/styles.module.css'
-import StarText from '../../../shared/Texts/StarText'
+import IconFilledButton from '../../ui/buttons/templates/IconFilledButton'
+import FilledInput from '../../ui/other/templates/FilledInput'
+import styles from './lib/styles.module.css'
+import StarText from '../../shared/Texts/StarText'
 import { useForm } from 'react-hook-form'
-import CustomCheckbox from './CustomCheckbox'
-import { LoginValues_T } from '../lib/types'
-import { useEffect, useState } from 'react'
-import loginAPI from '../../../../api/actions/LoginAPI'
-import MainSlice from '../../../../state/Reducers/MainSlice'
-import { useAppDispatch } from '../../../../state/hooks'
-import Spinner from '../../../ui/other/completed/Spinner'
+import RememberMeCheckBox from '../../ui/other/completed/RememberMeCheckBox'
+import { LoginValues_T } from './lib/types' 
+import { useState } from 'react'
+import loginAPI from '../../../api/actions/LoginAPI'
+import MainSlice from '../../../state/Reducers/MainSlice'
+import { useAppDispatch } from '../../../state/hooks'
+import Spinner from '../../ui/other/completed/Spinner'
 import { useNavigate } from 'react-router-dom'
-import ErrorHandler from '../../../../api/helpers/ErrorHandler'
+import ErrorHandler from '../../../api/helpers/ErrorHandler'
+import { LoginForm_T } from './lib/types'
 
 
 
-const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
 
     const { register, formState: { errors }, handleSubmit} = useForm<LoginValues_T>({
         mode: 'onChange',
@@ -45,10 +46,6 @@ const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.Se
             setLoading(false)
         }
     }
-
-    useEffect(() => {
-        console.log(errors.login)
-    }, [errors.login])
 
     return (
         <>
@@ -85,7 +82,7 @@ const LoginForm = ({ setIsLoginForm }: { setIsLoginForm: React.Dispatch<React.Se
 
                 {errors.password?.message && <StarText>{errors.password.message}</StarText>}
 
-                <CustomCheckbox
+                <RememberMeCheckBox
                     {...register('remember')}
                 />
 

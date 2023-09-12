@@ -23,12 +23,3 @@
     text-decoration: none;
     border: none;
 }
-
-.checkbox_container {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
-    background-color: rgb(255, 255, 255);
-    border-radius: 10px;
-    width: 100%;
-}
