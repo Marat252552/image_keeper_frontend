@@ -5,7 +5,8 @@ import MainSlice from "../../../state/Reducers/MainSlice";
 import { useAppDispatch } from "../../../state/hooks";
 import Image from "../../entities/Image";
 import { Image_T } from "../../shared/lib/types";
-import EditWindow from "../../entities/Image/elements/EditWindow";
+import EditWindow from "../../widgets/EditWindow";
+
 
 const ImageContainer = ({ image }: { image: Image_T }) => {
   const { deleteImage: deleteImageAC } = MainSlice.actions;

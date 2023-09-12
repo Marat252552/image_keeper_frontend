@@ -1,5 +1,5 @@
-import UploadButton from '../../../ui/buttons/UploadButton'
-import Title from '../../../ui/other/TitleLogo/Title'
+import UploadButton from '../../../ui/buttons/completed/UploadButton'
+import Title from '../../../ui/other/completed/TitleLogo/Title'
 import styles from './../lib/styles.module.css'
 
 

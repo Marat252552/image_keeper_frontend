@@ -1,8 +1,8 @@
-import UploadButton from '../../ui/buttons/UploadButton'
+import UploadButton from '../../ui/buttons/completed/UploadButton'
 import Info from './elements/Info'
-import Title from '../../ui/other/TitleLogo/Title'
+import Title from '../../ui/other/completed/TitleLogo/Title'
 import styles from './lib/styles.module.css'
-import { Header_T } from './lib/types'
+import { Header_T } from './lib/types';
 
 
 

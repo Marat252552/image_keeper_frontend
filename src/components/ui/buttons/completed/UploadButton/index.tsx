@@ -1,13 +1,13 @@
 import styles from "./lib/styles.module.css";
-import upload_image from "./../../../../assets/upload.svg";
-import AddImageAPI from "../../../../api/actions/AddImageAPI";
-import { useAppDispatch } from "../../../../state/hooks";
-import MainSlice from "../../../../state/Reducers/MainSlice";
-import GrayButtonTemplate from "../../../shared/templates/GrayButtonTemplate";
+import upload_image from "./../../../../../assets/upload.svg";
+import AddImageAPI from "../../../../../api/actions/AddImageAPI";
+import { useAppDispatch } from "../../../../../state/hooks";
+import MainSlice from "../../../../../state/Reducers/MainSlice";
+import GrayButtonTemplate from "../../../../shared/templates/GrayButtonTemplate";
 
 const UploadButton = () => {
   const dispatch = useAppDispatch();
-  const { addImage, updateTimePeriods } = MainSlice.actions;
+  const { addImage } = MainSlice.actions;
 
   const uploadFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -19,7 +19,6 @@ const UploadButton = () => {
         data: { image },
       } = await AddImageAPI(formData);
       dispatch(addImage({ image }));
-      dispatch(updateTimePeriods());
     }
   };
 

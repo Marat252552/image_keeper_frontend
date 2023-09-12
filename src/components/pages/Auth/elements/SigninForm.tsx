@@ -1,6 +1,6 @@
 import { FormOutlined } from '@ant-design/icons'
-import IconFilledButton from '../../../ui/buttons/IconFilledButton'
-import FilledInput from '../../../ui/FilledInput'
+import IconFilledButton from '../../../ui/buttons/templates/IconFilledButton'
+import FilledInput from '../../../ui/other/templates/FilledInput'
 import styles from './../lib/styles.module.css'
 import StarText from '../../../shared/Texts/StarText'
 import { useForm } from 'react-hook-form'
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../../../state/hooks' 
 import MainSlice from '../../../../state/Reducers/MainSlice'
 import { useState } from 'react'
-import Spinner from '../../../ui/Spinner'
+import Spinner from '../../../ui/other/completed/Spinner'
 import ErrorHandler from '../../../../api/helpers/ErrorHandler'
 
 

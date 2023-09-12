@@ -1,4 +1,4 @@
-import {forwardRef} from 'react'
+import {Ref, forwardRef} from 'react'
 import FilledElement from '../FilledElement'
 import TransparentInput from '../TransparentInput'
 
