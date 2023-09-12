@@ -7,6 +7,7 @@ import ErrorHandler from "../../../api/helpers/ErrorHandler";
 import { EditWindow_T } from "../../entities/Image/lib/types";
 import SaveButton from "../../ui/buttons/completed/SaveButton";
 import CloseButton from "../../ui/buttons/completed/CloseButton";
+import CharsWarning from "./elements/CharsWarning";
 
 
 const EditWindow: EditWindow_T = ({ image, setActive }) => {
@@ -39,7 +40,8 @@ const EditWindow: EditWindow_T = ({ image, setActive }) => {
           }}
           value={value}
         ></input>
-        <span style={{ fontSize: "8px" }}>100 chars max</span>
+        
+        <CharsWarning />
 
         <SaveButton onClick={EditLabel} />
       </div>
