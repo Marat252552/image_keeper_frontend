@@ -1,6 +1,5 @@
 import axios from 'axios'
 
-console.log(import.meta.env.backend_url)
 
 export const instanse = axios.create({
     withCredentials: true,

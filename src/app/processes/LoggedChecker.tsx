@@ -3,7 +3,7 @@ import loggedAPI from "../../api/actions/loggedAPI";
 import MainSlice from "../../state/Reducers/MainSlice";
 import { useAppDispatch } from "../../state/hooks";
 
-const LoggedChecker = ({ children }: { children: JSX.Element }) => {w
+const LoggedChecker = ({ children }: { children: JSX.Element }) => {
   const dispatch = useAppDispatch();
   const { setToken } = MainSlice.actions;
 
