@@ -1,105 +1,75 @@
-import { LoginOutlined } from '@ant-design/icons'
-import IconFilledButton from '../../ui/buttons/templates/IconFilledButton'
-import FilledInput from '../../ui/other/templates/FilledInput'
-import styles from './lib/styles.module.css'
-import StarText from '../../shared/Texts/StarText'
-import { useForm } from 'react-hook-form'
-import RememberMeCheckBox from '../../ui/other/completed/RememberMeCheckBox'
-import { LoginValues_T } from './lib/types' 
-import { useState } from 'react'
-import loginAPI from '../../../api/actions/loginAPI'
-import MainSlice from '../../../state/Reducers/MainSlice'
-import { useAppDispatch } from '../../../state/hooks'
-import Spinner from '../../ui/other/completed/Spinner'
-import { useNavigate } from 'react-router-dom'
-import ErrorHandler from '../../../api/helpers/ErrorHandler'
-import { LoginForm_T } from './lib/types'
-
-
+import { LoginOutlined } from '@ant-design/icons';
+import IconFilledButton from '../../ui/buttons/templates/IconFilledButton';
+import FilledInput from '../../ui/other/templates/FilledInput';
+import styles from './lib/styles.module.css';
+import StarText from '../../shared/Texts/StarText';
+import { useForm } from 'react-hook-form';
+import RememberMeCheckBox from '../../ui/other/completed/RememberMeCheckBox';
+import { LoginValues_T } from './lib/types';
+import { useState } from 'react';
+import loginAPI from '../../../api/actions/loginAPI';
+import MainSlice from '../../../state/Reducers/MainSlice';
+import { useAppDispatch } from '../../../state/hooks';
+import Spinner from '../../ui/other/completed/Spinner';
+import { useNavigate } from 'react-router-dom';
+import ErrorHandler from '../../../api/helpers/ErrorHandler';
+import { LoginForm_T } from './lib/types';
+import LoginInput from './elements/LoginInput';
+import PasswordInput from './elements/PasswordInput';
+import ToLoginFormButton from './elements/ToLoginFormButton';
 
 const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
-
-    const { register, formState: { errors }, handleSubmit} = useForm<LoginValues_T>({
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm<LoginValues_T>({
         mode: 'onChange',
         defaultValues: {
-            remember: true
-        }
-    })
+            remember: true,
+        },
+    });
 
-    const {setToken} = MainSlice.actions
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    const { setToken } = MainSlice.actions;
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     const onSubmit = async (values: LoginValues_T) => {
-        setLoading(true)
+        setLoading(true);
         try {
-            const {data} = await loginAPI(values)
-            const {accessToken} = data
-            dispatch(setToken({accessToken}))
-            localStorage.setItem('accessToken', accessToken)
-            navigate('/home')
-        } catch(e: unknown) {
-            ErrorHandler(e)
+            const { data } = await loginAPI(values);
+            const { accessToken } = data;
+            dispatch(setToken({ accessToken }));
+            localStorage.setItem('accessToken', accessToken);
+            navigate('/home');
+        } catch (e: unknown) {
+            ErrorHandler(e);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <>
             <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+                <StarText>Вход</StarText>
 
-                <StarText>
-                    Вход
-                </StarText>
+                <LoginInput register={register} errors={errors} />
 
-                <FilledInput
-                    placeholder='Логин'
-                    {...register('login', {
-                        required: 'Введите логин',
-                        maxLength: 20,
-                        pattern: {
-                            value: /^[a-z0-9]+$/i,
-                            message: 'Допустимы только латинские символы'
-                        },
-                    })}
-                />
-                {errors.login?.message && <StarText>{errors.login.message}</StarText>}
+                <PasswordInput errors={errors} register={register} />
 
-                <FilledInput
-                    {...register('password', {
-                        required: 'Введите пароль',
-                        pattern: {
-                            value: /^[a-z0-9]+$/i,
-                            message: 'Допустимы только латинские символы'
-                        }
-                    })}
-                    placeholder='Пароль'
-                    type='password'
-                />
+                <RememberMeCheckBox {...register('remember')} />
 
-                {errors.password?.message && <StarText>{errors.password.message}</StarText>}
+                {/* Переход к форме входа */}
+                <ToLoginFormButton setIsLoginForm={setIsLoginForm} />
 
-                <RememberMeCheckBox
-                    {...register('remember')}
-                />
-
-
-                <div onClick={() => { setIsLoginForm(false) }}>
-                    <StarText >
-                        Впервые здесь? Создать аккаунт
-                    </StarText>
-                </div>
-
-                <IconFilledButton
-                    IconComponent={loading? <Spinner /> : <LoginOutlined />}
-                />
-
+                {/* Кнопка submit */}
+                <IconFilledButton IconComponent={loading ? <Spinner /> : <LoginOutlined />} />
             </form>
         </>
-    )
-}
+    );
+};
 
-export default LoginForm
+export default LoginForm;
