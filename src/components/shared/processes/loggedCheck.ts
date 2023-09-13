@@ -1,4 +1,4 @@
-import loggedAPI from "../../../api/actions/LoggedAPI"
+import loggedAPI from "../../../api/actions/loggedAPI"
 
 
 const loggedCheck = async () => {
