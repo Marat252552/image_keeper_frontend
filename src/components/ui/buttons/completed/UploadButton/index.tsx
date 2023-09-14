@@ -10,6 +10,7 @@ const UploadButton = () => {
   const { addImage } = MainSlice.actions;
 
   const uploadFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
     const { files } = e.target;
     if (!files?.length) return;
     for (let i = 0; i < files?.length; i++) {
@@ -20,6 +21,7 @@ const UploadButton = () => {
       } = await AddImageAPI(formData);
       dispatch(addImage({ image }));
     }
+    e.target.files = null
   };
 
   return (

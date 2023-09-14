@@ -1,9 +1,9 @@
 import AddImageAPI from "../../../../api/actions/AddImageAPI";
 import ErrorHandler from "../../../../api/helpers/ErrorHandler";
-import { onDrop_T } from "../lib/types";
+import { onDropHandler_T } from "../lib/types";
 
 
-const onDrop: onDrop_T = (e, setDrag, dispatch, addImage) => {
+const onDropHandler: onDropHandler_T = (e, setDrag, dispatch, addImage) => {
   e.preventDefault();
   const files = [...e.dataTransfer.files];
   files.forEach(async (file) => {
@@ -19,4 +19,4 @@ const onDrop: onDrop_T = (e, setDrag, dispatch, addImage) => {
   setDrag(false);
 };
 
-export default onDrop;
+export default onDropHandler;

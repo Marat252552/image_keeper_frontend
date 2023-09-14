@@ -1,6 +1,5 @@
 import { LoginOutlined } from '@ant-design/icons';
 import IconFilledButton from '../../ui/buttons/templates/IconFilledButton';
-import FilledInput from '../../ui/other/templates/FilledInput';
 import styles from './lib/styles.module.css';
 import StarText from '../../shared/Texts/StarText';
 import { useForm } from 'react-hook-form';

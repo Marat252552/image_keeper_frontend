@@ -20,6 +20,7 @@ instanse.interceptors.response.use((config: any) => {
 }, async (error) => {
     const OriginalRequest = error.config
     if (error.response.status === 403 && error.config && !error.config._isRetry) {
+        localStorage.removeItem('accessToken')
         OriginalRequest._isRetry = true
         try {
             const response = await instanse.get('/auth/refresh')

@@ -17,7 +17,7 @@ export type dispatch_T = ThunkDispatch<
 > &
   Dispatch<AnyAction>;
 
-export type onDrop_T = (
+export type onDropHandler_T = (
   e: React.DragEvent<HTMLDivElement>,
   setDrag: (value: React.SetStateAction<boolean>) => void,
   dispatch: dispatch_T,

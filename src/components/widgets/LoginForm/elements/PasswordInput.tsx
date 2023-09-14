@@ -1,5 +1,6 @@
-import { FilledInput } from "@mui/material";
+
 import StarText from "../../../shared/Texts/StarText";
+import FilledInput from "../../../ui/other/templates/FilledInput";
 import { LoginFormInput_T } from "../lib/types";
 
 const PasswordInput: LoginFormInput_T = ({errors, register}) => (

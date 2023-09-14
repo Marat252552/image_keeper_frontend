@@ -1,19 +1,7 @@
-import { Image_T } from "../../components/shared/lib/types";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import CreateTimePeriods from "../helpers/CreateTimePeriods";
+import { initialState_T, MainSlice_T } from "../types";
 
-export type TimePeriod_T = {
-  label: string;
-  date: string;
-};
-
-export type initialState_T = {
-  data: {
-    timePeriods: TimePeriod_T[];
-    images: Image_T[];
-  };
-  token: string;
-};
 
 const initialState: initialState_T = {
   data: {
@@ -23,26 +11,26 @@ const initialState: initialState_T = {
   token: localStorage.getItem("accessToken") || "",
 };
 
-const MainSlice = createSlice({
+const MainSlice: MainSlice_T = createSlice({
   name: "main",
   initialState,
   reducers: {
-    setToken(state, action: PayloadAction<{ accessToken: string }>) {
+    setToken(state, action) {
       state.token = action.payload.accessToken;
     },
-    setImages(state, action: PayloadAction<{ images: Image_T[] }>) {
+    setImages(state, action) {
       const { images } = action.payload;
       state.data.images = images;
 
       state.data.timePeriods = CreateTimePeriods(state);
     },
-    addImage(state, action: PayloadAction<{ image: Image_T }>) {
+    addImage(state, action) {
       const { image } = action.payload;
       state.data.images.push(image);
 
       state.data.timePeriods = CreateTimePeriods(state);
     },
-    deleteImage(state, action: PayloadAction<{ image: Image_T }>) {
+    deleteImage(state, action) {
       const { _id } = action.payload.image;
 
       state.data.images = state.data.images.filter((image) => {
@@ -51,7 +39,7 @@ const MainSlice = createSlice({
 
       state.data.timePeriods = CreateTimePeriods(state);
     },
-    updateImage(state, action: PayloadAction<{image: Image_T}>) {
+    updateImage(state, action) {
       const {image} = action.payload
       state.data.images = state.data.images.filter(el => {
         return el._id !== image._id
