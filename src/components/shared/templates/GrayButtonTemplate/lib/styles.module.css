@@ -1,7 +1,9 @@
 .container {
   height: 24px;
   padding: 10px 15px 10px 10px;
+  width: 120px;
   display: flex;
+  justify-content: center;
   gap: 10px;
   border-radius: 10px;
   background-color: #eeeeee;
