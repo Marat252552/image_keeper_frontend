@@ -8,7 +8,7 @@ const CloseButton = ({onClick}: {onClick: () => void}) => {
       onClick={onClick}
       style={{ width: "100%", display: "flex", justifyContent: "end" }}
     >
-      <GrayButtonTemplate icon={<CloseOutlined />} text="Close Editor" />
+      <GrayButtonTemplate loading={false} icon={<CloseOutlined />} text="Close Editor" />
     </div>
   );
 };
