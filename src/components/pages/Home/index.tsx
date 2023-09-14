@@ -68,7 +68,7 @@ const HomePage = () => {
                             {timePeriods[0] ? (
                                 <>
                                     <Header images_total={images.length} />
-                                    <Body />
+                                    <Body images={images} timePeriods={timePeriods} />
                                 </>
                             ) : (
                                 <NoImagesWindow />

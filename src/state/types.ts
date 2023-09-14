@@ -24,6 +24,7 @@ export type MainSlice_T = Slice<initialState_T, {
     }>): void;
     addImage(state: Draft<initialState_T>, action: PayloadAction<{
         image: Image_T;
+        initial_image_id?: string
     }>): void;
     deleteImage(state: Draft<initialState_T>, action: PayloadAction<{
         image: Image_T;

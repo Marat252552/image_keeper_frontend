@@ -1,6 +1,6 @@
 
 
-const GetMonthName = (date: Date): string => {
+const GetMonthName = (date: string | Date): string => {
   const fullMonth = new Intl.DateTimeFormat("en-US", {
     month: "long",
   }).format(new Date(date));

@@ -25,7 +25,10 @@ const MainSlice: MainSlice_T = createSlice({
       state.data.timePeriods = CreateTimePeriods(state);
     },
     addImage(state, action) {
-      const { image } = action.payload;
+      const { image, initial_image_id } = action.payload;
+      if(initial_image_id) {
+        state.data.images = state.data.images.filter(image => image._id !== initial_image_id)
+      }
       state.data.images.push(image);
 
       state.data.timePeriods = CreateTimePeriods(state);
