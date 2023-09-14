@@ -33,7 +33,7 @@ const SigninForm: SigninForm_T = ({ setIsLoginForm }) => {
     const navigate = useNavigate();
 
     const dispatch = useAppDispatch();
-    const { setToken } = MainSlice.actions;
+    const { setIsLogged } = MainSlice.actions;
 
     const onSubmit = async ({ login, password, remember }: SigninValues_T) => {
         setLoading(true);
@@ -42,8 +42,8 @@ const SigninForm: SigninForm_T = ({ setIsLoginForm }) => {
             if (response.status === 201) {
                 navigate('/home');
                 const { accessToken } = response.data;
-                localStorage.setItem('access_token', accessToken);
-                dispatch(setToken({ accessToken }));
+                localStorage.setItem('accessToken', accessToken);
+                dispatch(setIsLogged(true));
             }
         } catch (e: unknown) {
             ErrorHandler(e);

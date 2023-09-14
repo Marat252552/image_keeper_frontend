@@ -12,19 +12,19 @@ export type TimePeriod_T = {
       timePeriods: TimePeriod_T[];
       images: Image_T[];
     };
-    token: string;
+    isLogged: boolean;
   };
 
 export type MainSlice_T = Slice<initialState_T, {
-    setToken(state: Draft<initialState_T>, action: PayloadAction<{
-        accessToken: string;
-    }>): void;
+    setIsLogged(state: Draft<initialState_T>, action: PayloadAction<boolean>): void;
     setImages(state: Draft<initialState_T>, action: PayloadAction<{
         images: Image_T[];
     }>): void;
     addImage(state: Draft<initialState_T>, action: PayloadAction<{
         image: Image_T;
-        initial_image_id?: string
+    }>): void;
+    removeImage(state: Draft<initialState_T>, action: PayloadAction<{
+        image_id: string;
     }>): void;
     deleteImage(state: Draft<initialState_T>, action: PayloadAction<{
         image: Image_T;

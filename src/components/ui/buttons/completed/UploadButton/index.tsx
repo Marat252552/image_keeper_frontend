@@ -13,7 +13,7 @@ import { v4 } from 'uuid';
 
 const UploadButton = () => {
     const dispatch = useAppDispatch();
-    const { addImage } = MainSlice.actions;
+    const { addImage, removeImage } = MainSlice.actions;
 
     const [loading, setLoading] = useState(false);
 
@@ -21,10 +21,10 @@ const UploadButton = () => {
         const { files } = e.target;
         if (!files?.length) return;
         for (let i = 0; i < files?.length; i++) {
+            const initial_image_id = v4();
             setLoading(true);
             try {
                 const file = files[i];
-                const initial_image_id = v4();
                 const formData = new FormData();
                 formData.append('file', files[i]);
                 const preloadedImage: Image_T = {
@@ -38,13 +38,14 @@ const UploadButton = () => {
                 const {
                     data: { image },
                 } = await AddImageAPI(formData);
-                dispatch(addImage({ image, initial_image_id }));
+                dispatch(addImage({ image }));
                 message.info(`${files[0].name} is uploaded`);
             } catch (e) {
                 ErrorHandler(e);
                 message.error(`${files[0].name} upload failed`);
             } finally {
                 setLoading(false);
+                dispatch(removeImage({image_id: initial_image_id}))
             }
         }
         e.target.files = null;

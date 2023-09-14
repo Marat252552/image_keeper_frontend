@@ -29,7 +29,7 @@ const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
         },
     });
 
-    const { setToken } = MainSlice.actions;
+    const { setIsLogged } = MainSlice.actions;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
         try {
             const { data } = await loginAPI(values);
             const { accessToken } = data;
-            dispatch(setToken({ accessToken }));
+            dispatch(setIsLogged(true));
             localStorage.setItem('accessToken', accessToken);
             navigate('/home');
         } catch (e: unknown) {

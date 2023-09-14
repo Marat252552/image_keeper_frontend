@@ -8,15 +8,15 @@ const initialState: initialState_T = {
     timePeriods: [],
     images: [],
   },
-  token: localStorage.getItem("accessToken") || "",
+  isLogged: false
 };
 
 const MainSlice: MainSlice_T = createSlice({
   name: "main",
   initialState,
   reducers: {
-    setToken(state, action) {
-      state.token = action.payload.accessToken;
+    setIsLogged(state, action) {
+      state.isLogged = action.payload;
     },
     setImages(state, action) {
       const { images } = action.payload;
@@ -25,11 +25,16 @@ const MainSlice: MainSlice_T = createSlice({
       state.data.timePeriods = CreateTimePeriods(state);
     },
     addImage(state, action) {
-      const { image, initial_image_id } = action.payload;
-      if(initial_image_id) {
-        state.data.images = state.data.images.filter(image => image._id !== initial_image_id)
-      }
+      const { image } = action.payload;
       state.data.images.push(image);
+
+      state.data.timePeriods = CreateTimePeriods(state);
+    },
+    removeImage(state, action) {
+      const { image_id } = action.payload;
+      if(image_id) {
+        state.data.images = state.data.images.filter(image => image._id !== image_id)
+      }
 
       state.data.timePeriods = CreateTimePeriods(state);
     },
