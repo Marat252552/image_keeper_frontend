@@ -1,5 +1,5 @@
 import GetFullDateAndLabel from "../../components/shared/helpers/GetFullDateAndLabel";
-import { TimePeriod_T, initialState_T } from "../Reducers/MainSlice";
+import { TimePeriod_T, initialState_T } from "../types"; 
 
 const CreateTimePeriods = (state: initialState_T) => {
   const timePeriods: TimePeriod_T[] = [];

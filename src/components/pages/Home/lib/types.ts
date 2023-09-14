@@ -5,7 +5,7 @@ import {
   ActionCreatorWithPayload,
 } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
-import { initialState_T } from "../../../../state/Reducers/MainSlice";
+import { initialState_T } from "../../../../state/types"; 
 import { Image_T } from "../../../shared/lib/types";
 
 export type dispatch_T = ThunkDispatch<
