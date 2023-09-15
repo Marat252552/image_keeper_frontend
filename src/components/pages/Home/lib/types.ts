@@ -2,7 +2,6 @@ import {
   ThunkDispatch,
   CombinedState,
   AnyAction,
-  ActionCreatorWithPayload,
 } from "@reduxjs/toolkit";
 import { Dispatch } from "react";
 import { initialState_T } from "../../../../state/types"; 
@@ -20,11 +19,6 @@ export type dispatch_T = ThunkDispatch<
 export type onDropHandler_T = (
   e: React.DragEvent<HTMLDivElement>,
   setDrag: (value: React.SetStateAction<boolean>) => void,
-  dispatch: dispatch_T,
-  addImage: ActionCreatorWithPayload<
-    {
-      image: Image_T;
-    },
-    "main/addImage"
-  >
+  addImage: (image: Image_T) => void,
+  removeImage: (image_id: string) => void
 ) => void;

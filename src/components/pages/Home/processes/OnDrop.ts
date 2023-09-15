@@ -1,21 +1,16 @@
-import AddImageAPI from "../../../../api/actions/AddImageAPI";
-import ErrorHandler from "../../../../api/helpers/ErrorHandler";
+import uploadImages from "../../../processes/UploadImages";
 import { onDropHandler_T } from "../lib/types";
 
 
-const onDropHandler: onDropHandler_T = (e, setDrag, dispatch, addImage) => {
+const onDropHandler: onDropHandler_T = (e, setDrag, addImage, removeImage) => {
   e.preventDefault();
-  const files = [...e.dataTransfer.files];
-  files.forEach(async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const response = await AddImageAPI(formData);
-      dispatch(addImage({ image: response.data.image }));
-    } catch (e) {
-      ErrorHandler(e);
-    }
-  });
+  let files = [...e.dataTransfer.files];
+  console.log(files)
+  if(!files[0]) return
+  // Переделываем в объект
+  files = Object.assign({}, files)
+  console.log(files)
+  uploadImages(files, addImage, removeImage)
   setDrag(false);
 };
 

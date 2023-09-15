@@ -16,6 +16,7 @@ import { LoginForm_T } from './lib/types';
 import LoginInput from './elements/LoginInput';
 import PasswordInput from './elements/PasswordInput';
 import ToLoginFormButton from './elements/ToLoginFormButton';
+import { message } from 'antd';
 
 const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
     const {
@@ -45,6 +46,7 @@ const LoginForm: LoginForm_T = ({ setIsLoginForm }) => {
             navigate('/home');
         } catch (e: unknown) {
             ErrorHandler(e);
+            message.error('Вероятно потеряна связь с сервером')
         } finally {
             setLoading(false);
         }

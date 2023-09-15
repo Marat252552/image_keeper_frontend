@@ -12,72 +12,60 @@ import NoImagesWindow from './elements/NoImagesWindow';
 import GetImagesAPI from '../../../api/actions/GetImageAPI';
 import ErrorHandler from '../../../api/helpers/ErrorHandler';
 import Spinner from '../../ui/other/completed/Spinner';
+import { Image_T } from '../../shared/lib/types';
+import ImagesFetchContainer from './elements/ImagesFetchContainer';
 
 const HomePage = () => {
-    const { addImage, setImages } = MainSlice.actions;
+    const { addImage: addImageAC, removeImage: removeImageAC } = MainSlice.actions;
     const { images, timePeriods } = useAppSelector((state) => state.mainReducer.data);
     const dispatch = useAppDispatch();
 
     const [drag, setDrag] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     const onDragStart = ReturnOnDragHandler(true, setDrag);
     const onDragLeave = ReturnOnDragHandler(false, setDrag);
 
     const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        onDropHandler(e, setDrag, dispatch, addImage);
+        const addImage = (image: Image_T) => {
+            dispatch(addImageAC({ image }));
+        };
+        const removeImage = (image_id: string) => {
+            dispatch(removeImageAC({ image_id }));
+        };
+        onDropHandler(e, setDrag, addImage, removeImage);
     };
 
-    useEffect(() => {
-        (async () => {
-            try {
-                const {
-                    data: { images },
-                } = await GetImagesAPI();
-                dispatch(setImages({ images }));
-            } catch (e) {
-                ErrorHandler(e);
-            } finally {
-                setLoading(false);
-            }
-        })();
-    }, []);
-
     return (
-        <>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <>
-                    {drag && (
-                        <div
-                            onDragStart={onDragStart}
-                            onDragLeave={onDragLeave}
-                            onDragOver={onDragStart}
-                            onDrop={onDrop}
-                        >
-                            <UploadWindow />
-                        </div>
-                    )}
-                    <LargeMaxFullWidthTemplate>
-                        <div
-                            onDragStart={onDragStart}
-                            onDragOver={onDragStart}
-                            className={styles.container}
-                        >
-                            {timePeriods[0] ? (
-                                <>
-                                    <Header images_total={images.length} />
-                                    <Body images={images} timePeriods={timePeriods} />
-                                </>
-                            ) : (
-                                <NoImagesWindow />
-                            )}
-                        </div>
-                    </LargeMaxFullWidthTemplate>
-                </>
-            )}
-        </>
+        <ImagesFetchContainer>
+            <>
+                {drag && (
+                    <div
+                        onDragStart={onDragStart}
+                        onDragLeave={onDragLeave}
+                        onDragOver={onDragStart}
+                        onDrop={onDrop}
+                    >
+                        <UploadWindow />
+                    </div>
+                )}
+                <LargeMaxFullWidthTemplate>
+                    <div
+                        onDragStart={onDragStart}
+                        onDragOver={onDragStart}
+                        className={styles.container}
+                    >
+                        {timePeriods[0] ? (
+                            <>
+                                <Header images_total={images.length} />
+                                <Body images={images} timePeriods={timePeriods} />
+                            </>
+                        ) : (
+                            <NoImagesWindow />
+                        )}
+                    </div>
+                </LargeMaxFullWidthTemplate>
+            </>
+        </ImagesFetchContainer>
     );
 };
 
