@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LargeMaxFullWidthTemplate from '../../shared/templates/LargeMaxFullWidthTemplate';
 import Header from '../../widgets/Header';
 import Body from './elements/Body';
@@ -9,9 +9,6 @@ import { useAppDispatch, useAppSelector } from '../../../state/hooks';
 import onDropHandler from './processes/OnDrop';
 import ReturnOnDragHandler from './processes/ReturnOnDragHandler';
 import NoImagesWindow from './elements/NoImagesWindow';
-import GetImagesAPI from '../../../api/actions/GetImageAPI';
-import ErrorHandler from '../../../api/helpers/ErrorHandler';
-import Spinner from '../../ui/other/completed/Spinner';
 import { Image_T } from '../../shared/lib/types';
 import ImagesFetchContainer from './elements/ImagesFetchContainer';
 
