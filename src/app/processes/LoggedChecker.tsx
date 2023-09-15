@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../state/hooks';
 import ErrorHandler from '../../api/helpers/ErrorHandler';
 import Spinner from '../../components/ui/other/completed/Spinner';
 
+
 const LoggedChecker = ({ children }: { children: JSX.Element }) => {
     const dispatch = useAppDispatch();
     const { setIsLogged } = MainSlice.actions;
@@ -26,7 +27,11 @@ const LoggedChecker = ({ children }: { children: JSX.Element }) => {
             }
         })();
     }, []);
-    if(loading) return <Spinner />
+    if(loading) return <div style={{display: 'flex', flexDirection: 'column', gap: '10px'}}>
+        <Spinner />
+        <span style={{fontSize: '12px'}}>Ожидание может занимать до 10 минут, т.к. для web сервис запущен на бесплатном хостинге</span>
+        
+        </div>
     return children;
 };
 
